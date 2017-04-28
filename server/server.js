@@ -15,6 +15,26 @@ app.use(express.static(publicPath));
 io.on('connection',(socket)=>{
     console.log('New User Connected');
 
+    socket.emit('newEmail', {
+        from: 'Mike@example.com',
+        text: 'Hey. Watsapp',
+        createdAt :123
+    });
+
+    socket.emit('newMessage',{
+        from: 'User1',
+        text: 'This is a Test Message',
+        createdAt : 123
+    });
+
+    socket.on('createEmail',(newEmail)=>{
+        console.log('createEmail', newEmail);
+    });
+
+    socket.on('createMessage', (message)=>{
+        console.log('Create Message', message);
+    });
+
     socket.on ('disconnect' , ()=>{
         console.log('Unable To Connect Server');
     });

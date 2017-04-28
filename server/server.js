@@ -15,19 +15,30 @@ app.use(express.static(publicPath));
 io.on('connection',(socket)=>{
     console.log('New User Connected');
 
-    socket.emit('newEmail', {
-        from: 'Mike@example.com',
-        text: 'Hey. Watsapp',
-        createdAt :123
-    });
+    // socket.emit('newEmail', {
+    //     from: 'Mike@example.com',
+    //     text: 'Hey. Watsapp',
+    //     createdAt :123
+    // });
 
+    
+socket.emit('newMessage', {
+    from:'Admin',
+    text: 'Welcome to The Chat App'
+});
 
+socket.broadcast.emit('newMessage', {
+    from : 'Hashmath',
+    text: 'New User Joined',
+    createdAt: new Date().getDate()
 
-    socket.on('createEmail',(newEmail)=>{
-        console.log('createEmail', newEmail);
-    });
+});
 
-    socket.on('createMessage', (message)=>{
+    // socket.on('createEmail',(newEmail)=>{
+    //     console.log('createEmail', newEmail);
+    // });
+
+     socket.on('createMessage', (message)=>{
         console.log('Create Message', message);
         io.emit('newMessage',{
             from: message.from,
@@ -35,6 +46,8 @@ io.on('connection',(socket)=>{
             createdAt: new Date(). getTime()
         });
     });
+
+   
 
     socket.on ('disconnect' , ()=>{
         console.log('Unable To Connect Server');

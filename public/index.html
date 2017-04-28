@@ -6,6 +6,20 @@
 
     <body>
         <p>Hai Welcome to the Chat Room</p>
+
+        <script src="/socket.io/socket.io.js"></script>
+        <script>
+           var socket = io();  
+
+           socket.on('connect',()=>{
+               console.log("User Connected client");
+           });  
+
+           socket.on('disconnect', ()=>{
+                console.log('Unable To Connect Client');
+           });
+        </script>   
+        
     </body>
 
 </html>

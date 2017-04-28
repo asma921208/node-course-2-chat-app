@@ -37,7 +37,9 @@ socket.broadcast.emit('newMessage', generateMessage('Admin', 'New User Joined') 
         callback("This is From The Server");
 });
 
-   
+   socket.on('createLocationMessage',(coords)=>{
+        io.emit('newMessage', generateMessage('Admin',`${coords.latitude}, ${coords.longitude}`));
+   });
 
     socket.on ('disconnect' , ()=>{
         console.log('Unable To Connect Server');

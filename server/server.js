@@ -21,11 +21,7 @@ io.on('connection',(socket)=>{
         createdAt :123
     });
 
-    socket.emit('newMessage',{
-        from: 'User1',
-        text: 'This is a Test Message',
-        createdAt : 123
-    });
+
 
     socket.on('createEmail',(newEmail)=>{
         console.log('createEmail', newEmail);
@@ -33,6 +29,11 @@ io.on('connection',(socket)=>{
 
     socket.on('createMessage', (message)=>{
         console.log('Create Message', message);
+        io.emit('newMessage',{
+            from: message.from,
+            test: message.text,
+            createdAt: new Date(). getTime()
+        });
     });
 
     socket.on ('disconnect' , ()=>{
